@@ -1,0 +1,20 @@
+.theme-dracula {
+  --fg-color: #F8F8F2;
+  --bg-color: #282A36;
+  --bg-lighter: #424450;
+  --bg-light: #343746;
+  --bg-dark: #21222C;
+  --bg-darker: #191A21;
+  --comment-color: #6272A4;
+  --selection-color: #44475A;
+  --subtle-color: #424450;
+  --cyan-color: #8BE9FD;
+  --green-color: #50FA7B;
+  --orange-color: #FFB86C;
+  --pink-color: #FF79C6;
+  --purple-color: #BD93F9;
+  --red-color: #FF5555;
+  --yellow-color: #F1FA8C;
+  --font-family: 'Cascadia Code', 'Courier New', monospace;
+  --line-height: 1.2;
+}

@@ -1,0 +1,46 @@
+{
+  "name": "termui-vue",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatijaNovosel/tri-state-checkbox.git"
+  },
+  "keywords": [
+    "vue3",
+    "vue",
+    "vuejs"
+  ],
+  "files": ["dist", "src/components/"],
+  "main": "./dist/termui-vue.umd.cjs",
+  "module": "./dist/termui-vue.js",
+  "exports": {
+    ".": {
+      "import": "./dist/termui-vue.js",
+      "require": "./dist/termui-vue.umd.cjs"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/tsconfig": "^0.7.0",
+    "path": "^0.12.7",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.5",
+    "vite-plugin-dts": "^4.4.0",
+    "vue-tsc": "^2.2.0"
+  }
+}
