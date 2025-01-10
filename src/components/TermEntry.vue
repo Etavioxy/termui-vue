@@ -10,12 +10,12 @@
 </template>
 
 <script setup lang="ts">
-import { useTemplateRef, reactive, provide } from 'vue'
+import { ref, reactive, provide } from 'vue'
 import { MovementManager } from '../movementManager'
 import '../palettes/dracula.css'
 
 const manager = reactive(new MovementManager());
-const termEntry = useTemplateRef('termEntry')
+const termEntry = ref<HTMLElement | null>(null)
 
 provide('movementManager', manager)
 

@@ -1,6 +1,6 @@
 {
   "name": "termui-vue",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "repository": {
@@ -21,8 +21,8 @@
       "require": "./dist/termui-vue.umd.cjs"
     },
     "./dist/style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
+      "import": "./dist/termui-vue.css",
+      "require": "./dist/termui-vue.css"
     }
   },
   "types": "./dist/index.d.ts",
