@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { HelloWorld } from './index'
 import { TermEntry, P, Pa } from './index'
 
 const colors = [
@@ -16,11 +15,11 @@ const colors = [
 ]
 
 const bgColors = [
-  'lighter',
-  'light',
-  'color',
-  'dark',
-  'darker',
+  'bg-lighter',
+  'bg-light',
+  'bg',
+  'bg-dark',
+  'bg-darker',
 ]
 
 const alertFunc = () => { alert('call execute') };

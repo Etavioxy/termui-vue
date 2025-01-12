@@ -41,7 +41,7 @@ defineExpose({
 })
 </script>
 
-<style scoped>
+<style>
 .t-block {
   box-sizing: border-box;
   color: var(--fg-color);

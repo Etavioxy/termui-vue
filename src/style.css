@@ -13,15 +13,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.lighter {
+.bg-lighter {
   background-color: var(--bg-lighter);
 }
-.light {
+.bg-light {
   background-color: var(--bg-light);
 }
-.dark {
+.bg {
+  background-color: var(--bg-color);
+}
+.bg-dark {
   background-color: var(--bg-dark);
 }
-.darker {
+.bg-darker {
   background-color: var(--bg-darker);
 }
