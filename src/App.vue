@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TermEntry, P, Pa } from './index'
+import { TermEntry, P, Pa, Pinput, Pcheckbox, Pselect, Ptextarea } from './index';
 
 const colors = [
   'comment',
