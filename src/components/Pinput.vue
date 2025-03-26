@@ -11,7 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
 import Pa from './Pa.vue'
 
 const props = defineProps<{ modelValue: string }>()
