@@ -14,8 +14,8 @@ import { ref, reactive, provide } from 'vue'
 import { MovementManager } from '../movementManager'
 import '../palettes/dracula.css'
 
-const manager = reactive(new MovementManager());
 const termEntry = ref<HTMLElement | null>(null)
+const manager = reactive(new MovementManager(termEntry))
 
 provide('movementManager', manager)
 

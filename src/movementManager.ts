@@ -1,8 +1,16 @@
-import type { TComponent } from './types.ts'
+import type { TComponent, PairNubmer } from './types.ts'
+import type { Ref } from 'vue'
+import { toValue } from 'vue'
 
 export class MovementManager {
+  private ref_termEntry: Ref<HTMLElement | null>
+  public lineHeight: number = 16
   public blocks: TComponent[] = []
   private currentFocus: TComponent | null = null
+  
+  constructor(termEntry: Ref<HTMLElement | null>) {
+    this.ref_termEntry = termEntry;
+  }
 
   registerBlock(t: TComponent) {
     if (!this.blocks.includes(t)) {
@@ -52,18 +60,54 @@ export class MovementManager {
     let nextBlock: TComponent | null = null
 
     if (key === 'h') {
-      nextBlock = this.findClosestBlock(currentRect, 'left')
+      nextBlock = this.findNext(currentRect, -1);
     } else if (key === 'j') {
       nextBlock = this.findClosestBlock(currentRect, 'down')
     } else if (key === 'k') {
       nextBlock = this.findClosestBlock(currentRect, 'up')
     } else if (key === 'l') {
-      nextBlock = this.findClosestBlock(currentRect, 'right')
+      nextBlock = this.findNext(currentRect, 1)
     }
 
     if (nextBlock) {
       this.focusBlock(nextBlock)
     }
+  }
+
+  getOneLineRectCenter(rect: DOMRect): PairNubmer {
+    // use 'toValue' in case that manager is reactive then ref is unavailable
+    const termRect = toValue(this.ref_termEntry)!.getBoundingClientRect() as DOMRect
+    //console.log(termRect, rect)
+    const h = this.lineHeight;
+    
+    return {
+      x: (rect.left + rect.width) / 2,
+      y: (Math.floor((rect.top - termRect.top) / h + 0.5) + 0.5) * h
+    }
+  }
+  
+  findNext(currentRect: DOMRect, direction: 1 | -1): TComponent | null {
+    const cmp = (a: PairNubmer, b: PairNubmer) => {
+      return Math.abs(a.y - b.y) > 1e-5 ? a.y - b.y : a.x - b.x 
+    }
+    let closest: [PairNubmer, TComponent] | null = null
+    const currentPos = this.getOneLineRectCenter(currentRect);
+
+    this.blocks.forEach(block => {
+      const rect = block.$el.getBoundingClientRect() as DOMRect
+      const pos = this.getOneLineRectCenter(rect)
+      if (
+        ((direction === 1 && cmp(currentPos, pos) < 0) ||
+        (direction === -1 && cmp(currentPos, pos) > 0))
+      &&
+        (closest === null ||
+        (direction === 1 && cmp(closest[0], pos) > 0) ||
+        (direction === -1 && cmp(closest[0], pos) < 0))
+      ) {
+        closest = [pos, block]
+      }
+    })
+    return closest ? closest[1] : null
   }
 
   findClosestBlock(currentRect: DOMRect, direction: 'left' | 'right' | 'up' | 'down'): TComponent | null {
@@ -73,7 +117,7 @@ export class MovementManager {
     this.blocks.forEach(block => {
       if (block === this.currentFocus) return
 
-      const rect = block.$el.getBoundingClientRect()
+      const rect = block.$el.getBoundingClientRect() as DOMRect
       let distance = Infinity
 
       if (direction === 'left' && rect.right <= currentRect.left && rect.top < currentRect.bottom && rect.bottom > currentRect.top) {
